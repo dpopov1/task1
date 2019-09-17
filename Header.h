@@ -4,26 +4,28 @@ class LV
 {
 public:
 	LV();
-	LV(double, double, double, double);
+	LV(const double, const double, const double, const double);
 	double x() const;
 	double y() const;
 	double z() const;
 	double t() const;
-	void x(double);
-	void y(double);
-	void z(double);
-	void t(double);
+	void x(const double);
+	void y(const double);
+	void z(const double);
+	void t(const double);
 	LV sum(const LV&) const;
 	LV sub(const LV&) const;
 	double smul(const LV&) const;
-	LV perehod(double);
+	void perehod(const double);
 	void outLV() const;
 	LV operator - (const LV&) const;
 	LV operator -() const;
 	double operator * (const LV&) const;
 	LV operator + (const LV&) const;
+	double norma() const;
+	void dout(const LV&) const;
 private:
 	double x_, y_, z_, t_;
 };
 
-void dout(double a);
+//void dout(const double);

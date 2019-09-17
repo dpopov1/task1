@@ -1,15 +1,21 @@
+#pragma once
 #include "Header.h"
-#include "windows.h"
+#include <iostream>
+using namespace std;
 int main()
 {
 	LV a = LV(1, 2, 3, 4);
-	LV b = LV(2, 4, 5, 6);
-	LV c = a + b;
-	LV m = a - b;
-	LV k = -a;
+	const LV b = LV(2, 4, 5, 6);
+	cout << "norma:" << (a.norma()) << endl;
+	a.dout(b);
+	const LV c = a + b;
+	const LV m = a - b;
+	const LV k = -a;
+	a.perehod(0.5);
 	c.outLV();
 	m.outLV();
 	k.outLV();
-	dout(a*b);
+	a.outLV();
+	cout <<"norma:" <<(a.norma())<< endl;
 	system("pause");
 }

@@ -1,6 +1,6 @@
 #include "Header.h"
-#include "math.h"
-#include "iostream"
+#include <math.h>
+#include <iostream>
 using namespace std;
 LV::LV()
 {
@@ -57,8 +57,11 @@ double LV::smul(const LV& a) const {
 	return x_ * a.x_+ y_ * a.y_+ z_ * a.z_- t_ * a.t_;
 }
 
-LV LV::perehod(double v) {
-	return LV(x_*cosh(v) - t_ * sinh(v), y_, z_, cosh(v)*t_ - sinh(v)*x_);
+void LV::perehod(double v) {
+	v = atanh(v);
+	double tmp = x_;
+	x_ = x_ * cosh(v) - t_ * sinh(v);
+	t_ = cosh(v)*t_ - sinh(v)*tmp;
 }
 
 void LV::outLV() const
@@ -66,9 +69,9 @@ void LV::outLV() const
 	cout << "(" << x_ <<","<< y_ << ","<<z_ <<","<< t_ << ")" << endl;
 }
 
-void dout(double a)
+void LV:: dout(const LV &a) const
 {
-	cout <<"smul:" <<a<<endl;
+	cout <<"smul:" <<a**this<<endl;
 }
 
 LV LV::operator-(const LV &a) const
@@ -78,7 +81,7 @@ LV LV::operator-(const LV &a) const
 
 LV LV::operator-() const
 {
-	return sub(LV());
+	return LV()-*this;
 }
 
 LV LV::operator+(const LV &a) const
@@ -89,4 +92,9 @@ LV LV::operator+(const LV &a) const
 double LV::operator*(const LV &a) const
 {
 	return smul(a);
+}
+
+double LV::norma() const
+{
+	return sqrt(fabs(*this**this));
 }
